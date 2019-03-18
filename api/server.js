@@ -16,7 +16,7 @@ server.use(express.json());
 
 //CRUD: 
 server.get('/', (req, res) => {
-    res.status(200).json({ message: 'SC working' });
+    res.status(200).json({ message: 'How-To Test Working' });
   });
 
 
