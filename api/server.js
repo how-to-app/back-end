@@ -11,7 +11,7 @@ server.use(helmet());
 server.use(cors());
 server.use(morgan());
 server.use(express.json());
-
+server.use('/api', authRouter);
 
 
 //CRUD: 

@@ -4,6 +4,7 @@
   "description": "Build Week Back End",
   "main": "index.js",
   "scripts": {
+    "start": "index.js",
     "server": "nodemon index.js"
   },
   "keywords": [],
