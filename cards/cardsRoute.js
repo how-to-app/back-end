@@ -55,24 +55,46 @@ cardsRouter.post('/cards', (req, res) => {
 	}
 });
 
-// //DELETE:
+//DELETE:
 
-// cardsRouter.delete('/:id', (req, res) => {
+cardsRouter.delete('/:id/cards', (req, res) => {
+	const { id } = req.params;
+	db
+		.remove(id)
+		.then((card) => {
+			if (card) {
+				res.status(204).end();
+			} else {
+				res.status(404).json({ success: false, message: 'The card with the specified ID does not exist.' });
+			}
+		})
+		.catch((err) => {
+			res.status(500).json({ error: 'The card could not be removed.' });
+		});
+});
+
+
+// //PUT:
+
+// cardsRouter.put('/:id', (req, res) => {
 // 	const { id } = req.params;
+// 	const changes = req.body;
+
 // 	db
-// 		.remove(id)
-// 		.then((card) => {
-// 			if (card) {
-// 				res.status(204).end();
+// 		.update(id, changes)
+// 		.then((postUpdate) => {
+// 			if (!postUpdate) {
+// 				res.status(404).json({ success: false, message: 'The post with the specified ID does not exist.' });
+// 			} else if ( !changes.text && !changes.user_id ) {
+// 				return res.status(400).json({ success: false, message: 'Please provide the text and user id.' });
 // 			} else {
-// 				res.status(404).json({ success: false, message: 'The card with the specified ID does not exist.' });
+// 				return res.status(200).json({ success: true, changes });
 // 			}
 // 		})
 // 		.catch((err) => {
-// 			res.status(500).json({ error: 'The card could not be removed' });
-// 		});
+// 			res.status(500).json({ success: false, error: 'The post information could not be modified.' });
+// 		})
 // });
-
 
 
 
