@@ -7,11 +7,11 @@ exports.up = function(knex) {
         .string('title', 128)
         .notNullable()
         .unique();
-      cards.string('step1', 128);
-      cards.string('step2', 128);
-      cards.string('step3', 128);
-      cards.string('step4', 128);
-      cards.string('step5', 128);
+      cards.string('step1', 255);
+      cards.string('step2', 255);
+      cards.string('step3', 255);
+      cards.string('step4', 255);
+      cards.string('step5', 255);
     
       
     });
