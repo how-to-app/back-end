@@ -42,7 +42,7 @@ cardsRouter.post('/cards', (req, res) => {
     const { title, step1, step2, step3, step4, step5} = req.body;
     
 	if ( !title || !step1 || step2 || step3 || step4 || step5 ) {
-		res.status(400).json({ error: 'Please provide the title and required steps.' });
+		res.status(400).json({ error: 'Please provide the title and corresponding step(s).' });
 	} else {
 		db
 			.insert({ title, step1, step2, step3, step4, step5 })
@@ -74,27 +74,27 @@ cardsRouter.delete('/:id/cards', (req, res) => {
 });
 
 
-// //PUT:
+//PUT:
 
-// cardsRouter.put('/:id', (req, res) => {
-// 	const { id } = req.params;
-// 	const changes = req.body;
+cardsRouter.put('/:id/cards', (req, res) => {
+	const { id } = req.params;
+	const changes = req.body;
 
-// 	db
-// 		.update(id, changes)
-// 		.then((postUpdate) => {
-// 			if (!postUpdate) {
-// 				res.status(404).json({ success: false, message: 'The post with the specified ID does not exist.' });
-// 			} else if ( !changes.text && !changes.user_id ) {
-// 				return res.status(400).json({ success: false, message: 'Please provide the text and user id.' });
-// 			} else {
-// 				return res.status(200).json({ success: true, changes });
-// 			}
-// 		})
-// 		.catch((err) => {
-// 			res.status(500).json({ success: false, error: 'The post information could not be modified.' });
-// 		})
-// });
+	db
+		.update(id, changes)
+		.then((cardUpdate) => {
+			if (!cardUpdate) {
+				res.status(404).json({ success: false, message: 'The card with the specified ID does not exist.' });
+			} else if ( !changes.title && !changes.step1 ) {
+				return res.status(400).json({ success: false, message: 'Please provide the title and corresponding step(s).' });
+			} else {
+				return res.status(200).json({ success: true, changes });
+			}
+		})
+		.catch((err) => {
+			res.status(500).json({ success: false, error: 'The post information could not be modified.' });
+		})
+});
 
 
 
