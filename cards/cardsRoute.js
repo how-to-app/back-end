@@ -39,13 +39,13 @@ cardsRouter.get('/cards', (req, res) => {
 //POST:CREATE 
 
 cardsRouter.post('/cards', (req, res) => {
-    const { title, step1, step2, step3, step4, step5} = req.body;
+    const { title, step1, step2, step3, step4, step5, username, likes, image} = req.body;
     
-	if ( !title || !step1 || step2 || step3 || step4 || step5 ) {
+	if ( !title || !step1 ) {
 		res.status(400).json({ error: 'Please provide the title and corresponding step(s).' });
 	} else {
 		db
-			.insert({ title, step1, step2, step3, step4, step5 })
+			.insert({ title, step1, step2, step3, step4, step5, username, likes, image })
 			.then((card) => {
 				res.status(201).json({  message: 'Your title and steps have been saved.', card });
 			})
