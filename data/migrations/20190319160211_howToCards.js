@@ -12,8 +12,9 @@ exports.up = function(knex) {
       cards.string('step3', 255);
       cards.string('step4', 255);
       cards.string('step5', 255);
-      cards.string('likes', 128);
-      cards.string('image', 255);
+      cards.integer('likes');
+      cards.string('image');
+      cards.string('username',128);
     
       
     });

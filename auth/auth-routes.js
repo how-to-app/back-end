@@ -59,7 +59,7 @@ authRouter.post('/login', (req, res) => {
           //returns token
           res
             .status(200)
-            .json({ message: `Welcome ${user.username}!`, token, }); //(token implemented sends token to the client)
+            .json({ message: `Welcome ${user.username}!`, token, username:user.username }); //(token implemented sends token to the client)
         } else {
           res.status(401).json({ message: 'Invalid Credentials' });
         }
