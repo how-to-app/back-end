@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "test": "jest --watch --verbose",
+    "test": "jest --watch --verbose"
   },
   "keywords": [],
   "author": "",
