@@ -33,7 +33,7 @@ describe('server.js', () => {
 
 
       it('should return 201 CREATED', async () => {
-        const res = await request(server).post('/register')
+        const res = await request(server).post('/api/register')
 
     expect(res.status).toBe(201); 
     })
