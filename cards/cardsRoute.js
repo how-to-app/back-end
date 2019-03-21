@@ -19,22 +19,22 @@ cardsRouter.get('/cards', (req, res) => {
 
 // //GET by Id (can be used if needed) 
 
-// cardsRouter.get('/:id/cards', (req, res) => {
-// 	const { id } = req.params;
+cardsRouter.get('/cards/:id', (req, res) => {
+	const { id } = req.params;
 
-// 	db
-// 		.getById(id)
-// 		.then((cards) => {
-// 			if (cards) {
-// 				res.status(201).json({ success: true, cards });
-// 			} else {
-// 				res.status(404).json({ success: false, message: 'The card with the specified ID does not exist.' });
-// 			}
-// 		})
-// 		.catch((err) => {
-// 			res.status(500).json({ success: false, error: 'This card could not be retrieved.' });
-// 		});
-// });
+	db
+		.getById(id)
+		.then((cards) => {
+			if (cards) {
+				res.status(201).json({ success: true, cards });
+			} else {
+				res.status(404).json({ success: false, message: 'The card with the specified ID does not exist.' });
+			}
+		})
+		.catch((err) => {
+			res.status(500).json({ success: false, error: 'This card could not be retrieved.' });
+		});
+});
 
 //POST:CREATE 
 
@@ -57,7 +57,7 @@ cardsRouter.post('/cards', (req, res) => {
 
 //DELETE:
 
-cardsRouter.delete('/:id/cards', (req, res) => {
+cardsRouter.delete('/cards/:id', (req, res) => {
 	const { id } = req.params;
 	db
 		.remove(id)
@@ -76,7 +76,7 @@ cardsRouter.delete('/:id/cards', (req, res) => {
 
 //PUT:
 
-cardsRouter.put('/:id/cards', (req, res) => {
+cardsRouter.put('/cards/:id', (req, res) => {
 	const { id } = req.params;
 	const changes = req.body;
 
