@@ -1,6 +1,6 @@
 const cardsRouter = require('express').Router();
 
-const { authenticate } = require('../auth/authenticate');
+// const { authenticate } = require('../auth/authenticate');
 
 const db = require('../cards/cardsModel.js');
 
@@ -17,24 +17,24 @@ cardsRouter.get('/cards', (req, res) => {
 		});
 });
 
-// //GET by Id (can be used if needed) 
+//GET by Id (can be used if needed) 
 
-// cardsRouter.get('/:id/cards', (req, res) => {
-// 	const { id } = req.params;
+cardsRouter.get('/:id/cards', (req, res) => {
+	const { id } = req.params;
 
-// 	db
-// 		.getById(id)
-// 		.then((cards) => {
-// 			if (cards) {
-// 				res.status(201).json({ success: true, cards });
-// 			} else {
-// 				res.status(404).json({ success: false, message: 'The card with the specified ID does not exist.' });
-// 			}
-// 		})
-// 		.catch((err) => {
-// 			res.status(500).json({ success: false, error: 'This card could not be retrieved.' });
-// 		});
-// });
+	db
+		.getById(id)
+		.then((cards) => {
+			if (cards) {
+				res.status(200).json({ success: true, cards });
+			} else {
+				res.status(404).json({ success: false, message: 'The card with the specified ID does not exist.' });
+			}
+		})
+		.catch((err) => {
+			res.status(500).json({ success: false, error: 'This card could not be retrieved.' });
+		});
+});
 
 //POST:CREATE 
 
