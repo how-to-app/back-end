@@ -92,7 +92,7 @@ describe('server.js', () => {
           const statusCode = 200;
 
           const res = await request(server)
-            .get('/api/3/cards')
+            .get('/api/cards/3')
             .send({data});
           expect(res.status).toBe(statusCode);
        })
