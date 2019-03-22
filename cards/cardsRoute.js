@@ -19,7 +19,7 @@ cardsRouter.get('/cards', (req, res) => {
 
 //GET by Id (can be used if needed) 
 
-cardsRouter.get('/:id/cards', (req, res) => {
+cardsRouter.get('/cards/:id', (req, res) => {
 	const { id } = req.params;
 
 	db
