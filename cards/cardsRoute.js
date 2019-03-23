@@ -1,12 +1,14 @@
 const cardsRouter = require('express').Router();
 
-// const { authenticate } = require('../auth/authenticate');
+const { authenticate } = require('../auth/authenticate');
 
 const db = require('../cards/cardsModel.js');
 
-//GET:
 
-cardsRouter.get('/cards', (req, res) => {
+//EP for cards:
+
+//GET: cards
+cardsRouter.get('/cards', authenticate, (req, res) => {
 	db
 		.get()
 		.then((cards) => {
@@ -14,11 +16,11 @@ cardsRouter.get('/cards', (req, res) => {
 		}) //headers
 		.catch((err) => {
 			res.status(500).json({ success: false, message: 'The card information could not be retrieved.' });
-		});
+		})
 });
 
-//GET by Id (can be used if needed) 
 
+//GET by Id (can be used if needed) 
 cardsRouter.get('/cards/:id', (req, res) => {
 	const { id } = req.params;
 
@@ -36,8 +38,8 @@ cardsRouter.get('/cards/:id', (req, res) => {
 		});
 });
 
-//POST:CREATE 
 
+//POST:CREATE 
 cardsRouter.post('/cards', (req, res) => {
     const { title, step1, step2, step3, step4, step5, username, likes, image} = req.body;
     
@@ -55,8 +57,8 @@ cardsRouter.post('/cards', (req, res) => {
 	}
 });
 
-//DELETE:
 
+//DELETE:
 cardsRouter.delete('/:id/cards', (req, res) => {
 	const { id } = req.params;
 	db
@@ -75,7 +77,6 @@ cardsRouter.delete('/:id/cards', (req, res) => {
 
 
 //PUT:
-
 cardsRouter.put('/:id/cards', (req, res) => {
 	const { id } = req.params;
 	const changes = req.body;
