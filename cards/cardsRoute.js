@@ -4,9 +4,11 @@ const { authenticate } = require('../auth/authenticate');
 
 const db = require('../cards/cardsModel.js');
 
-//GET:
 
-cardsRouter.get('/cards', (req, res) => {
+//EP for cards:
+
+//GET: cards
+cardsRouter.get('/cards', authenticate, (req, res) => {
 	db
 		.get()
 		.then((cards) => {
@@ -14,11 +16,11 @@ cardsRouter.get('/cards', (req, res) => {
 		}) //headers
 		.catch((err) => {
 			res.status(500).json({ success: false, message: 'The card information could not be retrieved.' });
-		});
+		})
 });
 
-// //GET by Id (can be used if needed) 
 
+//GET by Id (can be used if needed) 
 cardsRouter.get('/cards/:id', (req, res) => {
 	const { id } = req.params;
 
@@ -26,7 +28,7 @@ cardsRouter.get('/cards/:id', (req, res) => {
 		.getById(id)
 		.then((cards) => {
 			if (cards) {
-				res.status(201).json({ success: true, cards });
+				res.status(200).json({ success: true, cards });
 			} else {
 				res.status(404).json({ success: false, message: 'The card with the specified ID does not exist.' });
 			}
@@ -36,8 +38,8 @@ cardsRouter.get('/cards/:id', (req, res) => {
 		});
 });
 
-//POST:CREATE 
 
+//POST:CREATE 
 cardsRouter.post('/cards', (req, res) => {
     const { title, step1, step2, step3, step4, step5, username, likes, image} = req.body;
     
@@ -55,9 +57,9 @@ cardsRouter.post('/cards', (req, res) => {
 	}
 });
 
-//DELETE:
 
-cardsRouter.delete('/cards/:id', (req, res) => {
+//DELETE:
+cardsRouter.delete('/:id/cards', (req, res) => {
 	const { id } = req.params;
 	db
 		.remove(id)
@@ -75,8 +77,7 @@ cardsRouter.delete('/cards/:id', (req, res) => {
 
 
 //PUT:
-
-cardsRouter.put('/cards/:id', (req, res) => {
+cardsRouter.put('/:id/cards', (req, res) => {
 	const { id } = req.params;
 	const changes = req.body;
 
